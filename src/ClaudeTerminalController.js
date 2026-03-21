@@ -1,4 +1,4 @@
-const { spawn } = require('child_pcrocess');
+const { spawn } = require('child_process');
 class ClaudeTerminalController{
     constructor(cwd, timeoutMS)
     {
