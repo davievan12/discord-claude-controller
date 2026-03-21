@@ -1,4 +1,4 @@
-const { spawn } = require('child_process');
+const { spawn } = require('child_pcrocess');
 class ClaudeTerminalController{
     constructor(cwd, timeoutMS)
     {
@@ -20,17 +20,14 @@ class ClaudeTerminalController{
                 processo.stdout.on('data', (pedaco)=> {chunks.push(pedaco.toString())})
                 processo.stderr.on('data', (erro)=> {erros.push(erro.toString())})
                 processo.on('close',(code) => {
+                    clearTimeout(timer);
                 if (code == 0){
                     resolve(chunks.join(''));
                 }
-                
                 else
                 {
                     reject(new Error(erros.join('')))
                 }
-
-                
-                
             })
         })    
     
@@ -38,4 +35,3 @@ class ClaudeTerminalController{
 }
 
 module.exports = ClaudeTerminalController;
-
