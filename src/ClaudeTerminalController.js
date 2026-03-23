@@ -10,8 +10,14 @@ class ClaudeTerminalController{
     {
         return new Promise((resolve, reject) => 
             {
-                const processo = spawn('claude', ['--print', '--system-prompt', 'Você é um assistente inteligente e direto. Responda de forma natural e conversacional em português brasileiro. Seja objetivo e claro nas respostas. Responda perguntas normalmente como numa conversa. Só trate como tarefa de programação se explicitamente pedido.', prompt], { cwd: this.cwd, shell: true });
-                const timer = setTimeout(() => {
+                    const processo = spawn('claude', [
+                    '-p', `"${prompt}"`, // -p é o atalho para prompt
+                    '--no-color',         // Remove códigos de cores que quebram o bot
+                    '--non-interactive'   // Evita que ele fique esperando confirmações
+                    ], { cwd: this.cwd, shell: true });
+
+
+                    const timer = setTimeout(() => {
                     processo.kill();
                     reject(new Error('Timeout!'));
                 }, this.timeoutMS);
