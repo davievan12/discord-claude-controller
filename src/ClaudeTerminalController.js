@@ -10,11 +10,9 @@ class ClaudeTerminalController{
     {
         return new Promise((resolve, reject) => 
             {
-                    const processo = spawn('claude', [
-                    '-p', `"${prompt}"`, // -p é o atalho para prompt
-                    '--no-color',         // Remove códigos de cores que quebram o bot
-                    '--non-interactive'   // Evita que ele fique esperando confirmações
-                    ], { cwd: this.cwd, shell: true });
+                    const processo = spawn('claude', [], { cwd: this.cwd, shell: true });
+                    processo.stdin.write(prompt + '\n');
+                    processo.stdin.end();
 
 
                     const timer = setTimeout(() => {
