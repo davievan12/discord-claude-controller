@@ -10,7 +10,7 @@ class ClaudeTerminalController{
     {
         return new Promise((resolve, reject) => 
             {
-                    const processo = spawn('claude', [], { cwd: this.cwd, shell: true });
+                    const processo = spawn('claude', ['--dangerously-skip-permissions'], { cwd: this.cwd, shell: true });
                     processo.stdin.write(prompt + '\n');
                     processo.stdin.end();
 
